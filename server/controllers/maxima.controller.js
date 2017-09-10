@@ -7,12 +7,9 @@ function list(req, res, next) {
     .catch(e => next(e));
 }
 
-function get(req, res, next, id) {
-  Maxima.get(id)
-    .then((product) => {
-      req.product = product; // eslint-disable-line no-param-reassign
-      return next();
-    })
+function get(req, res, next) {
+  Maxima.get(req.params.id)
+    .then((product) => res.json(product))
     .catch(e => next(e));
 }
 
