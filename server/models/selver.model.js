@@ -33,6 +33,7 @@ SelverSchema.statics = {
     return this.find(searchOptions)
       .skip(+skip)
       .limit(+limit)
+      .sort({unitprice: 1})
       .exec();
   }
 };
