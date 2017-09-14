@@ -28,12 +28,15 @@ SelverSchema.statics = {
         return Promise.reject(err);
       });
   },
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
+  list({ skip = 0, limit = 50, q } = {}) {
+    const searchOptions = q ? {$text: {$search: q}} : undefined;
+    return this.find(searchOptions)
       .skip(+skip)
       .limit(+limit)
       .exec();
   }
 };
+
+SelverSchema.index({product: 'text'});
 
 export default mongoose.model('Selver', SelverSchema, 'selver');
