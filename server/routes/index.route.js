@@ -3,6 +3,8 @@ import userRoutes from './user.route';
 import authRoutes from './auth.route';
 import maximaRoutes from './maxima.route';
 import selverRoutes from './selver.route';
+import prismaRoutes from './prisma.route';
+import coopRoutes from './coop.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -19,5 +21,7 @@ router.use('/auth', authRoutes);
 
 router.use('/maxima', maximaRoutes);
 router.use('/selver', selverRoutes);
+router.use('/prisma', prismaRoutes);
+router.use('/coop', coopRoutes);
 
 export default router;
