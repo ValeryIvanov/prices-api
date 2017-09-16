@@ -30,7 +30,7 @@ MaximaSchema.statics = {
       });
   },
   list({ skip = 0, limit = 50, q } = {}) {
-    const searchOptions = q ? {$text: {$search: q}} : undefined;
+    const searchOptions = q ? {'product': {$regex: q, $options: 'i'}} : undefined;
     return this.find(searchOptions)
       .skip(+skip)
       .limit(+limit)
