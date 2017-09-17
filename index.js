@@ -13,11 +13,20 @@ Promise = require('bluebird'); // eslint-disable-line no-global-assign
 // plugin bluebird promise in mongoose
 mongoose.Promise = Promise;
 
-// connect to mongo db
+
+let reconnTimer = null;
 const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
+function connect() {
+  mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
+}
+// connect to mongo db
+connect();
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
+  if (reconnTimer) {
+    console.log("already trying to reconnect...");
+  } else {
+    reconnTimer = setTimeout(connect, 500); // try after delay
+  }
 });
 
 // print mongoose logs in dev env
