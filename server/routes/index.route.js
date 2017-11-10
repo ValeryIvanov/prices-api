@@ -6,6 +6,7 @@ import selverRoutes from './selver.route';
 import prismaRoutes from './prisma.route';
 import coopRoutes from './coop.route';
 import cartRoutes from './cart.route';
+import apolloRoutes from './apollo.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -25,5 +26,7 @@ router.use('/selver', selverRoutes);
 router.use('/prisma', prismaRoutes);
 router.use('/coop', coopRoutes);
 router.use('/cart', cartRoutes);
+
+router.use('/apollo', apolloRoutes);
 
 export default router;
